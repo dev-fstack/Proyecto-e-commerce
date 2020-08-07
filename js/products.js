@@ -26,7 +26,7 @@ function showCategoriesList(array){
         </div>
         `
 
-        document.getElementById("container p-5").innerHTML = htmlContentToAppend;
+        document.getElementById("info").innerHTML = htmlContentToAppend;
     }
 }
 
