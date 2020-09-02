@@ -24,6 +24,7 @@ form.addEventListener("submit", function (event) {
     if(email.validity.valid && password.validity.valid) {
         event.preventDefault();
     }
+    localStorage.setItem("emailProfile",email.value);
 });
 
 button.addEventListener("click", function(event) {
