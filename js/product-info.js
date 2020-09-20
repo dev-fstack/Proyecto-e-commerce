@@ -8,19 +8,33 @@ var products = [];
 
 function showProductsImages (array) {
     let htmlContentToAppend = "";
+    let htmlContent ="";
 
     for (let i = 0; i < array.length; i++){
         let imageSrc = array[i];
 
-        htmlContentToAppend += `
+        if (i ==0){
+            htmlContent += 
+            `<li data-target="#carImages" data-slide-to="`+ i +`"></li>`
+
+            htmlContentToAppend +=
+            `<div class="carousel-item active">
+              <img src="` + imageSrc + `" alt="">
+             </div>`
+        }else {
+            htmlContent += 
+            `<li data-target="#carImages" data-slide-to="`+ i +`"></li>`
+
+            htmlContentToAppend += `
         <div class="carousel-item">
         <img src="` + imageSrc + `" alt="">
         </div>
         `
-
+        };
         document.getElementById("images").innerHTML = htmlContentToAppend;
+        document.getElementById("carousel").innerHTML = htmlContent;
     }
-}
+};
 
 function showRelatedProducts (array){
     let relatedProductsToAppend = "";
@@ -85,9 +99,31 @@ document.addEventListener("DOMContentLoaded", function(e){
             products = result.data;
         }
     })
+
+    getJSONData(PRODUCT_INFO_URL).then(function(resultObj){
+            if (resultObj.status === "ok") {
+                product = resultObj.data;
+                productImages = product.images;
+                related = product.relatedProducts;
+    
+                let productNameHTML = document.getElementById("productName");
+                let productDescriptionHTML = document.getElementById("productDescription");
+                let productCostHTML = document.getElementById("productCost");
+                let productSoldCountHTML = document.getElementById("productSoldCount");
+    
+                productNameHTML.innerHTML = product.name;
+                productDescriptionHTML.innerHTML = product.description;
+                productCostHTML.innerHTML = product.cost;
+                productSoldCountHTML.innerHTML = product.soldCount;
+    
+                showProductsImages(productImages);
+                showRelatedProducts(related);
+            }
+    
+        })
 });
 
-document.addEventListener("DOMContentLoaded", function(e){
+/*document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(PRODUCT_INFO_URL).then(function(resultObj){
         if (resultObj.status === "ok") {
             product = resultObj.data;
@@ -110,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 
     })
 
-});
+}); */
 
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(response){

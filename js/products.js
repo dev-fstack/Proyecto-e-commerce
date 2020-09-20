@@ -34,7 +34,7 @@ function showCategoriesList(){
          <div class="list-group-item list-group-item-action">
             <div class="row">
                 <div class="col-3">
-                    <img src="` + category.imgSrc + `" alt="` + category.description + `" class="img-thumbnail">
+                    <a href= "product-info.html"><img src="` + category.imgSrc + `" alt="` + category.description + `" class="img-thumbnail"></a>
                 </div>
                 <div class="col">
                     <div class="d-flex w-100 justify-content-between">
